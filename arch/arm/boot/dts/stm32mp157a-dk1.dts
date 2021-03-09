@@ -24,3 +24,17 @@
 		stdout-path = "serial0:115200n8";
 	};
 };
+&i2c5 {
+	status = "okay";
+	clock-frequency = <100000>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&i2c5_pins_a>;
+	pinctrl-1 = <&i2c5_sleep_pins_a>;
+
+	mpu9250@68{
+		compatible = "invensense,mpu9250";
+		reg = <0x68>;
+		interrupts-extended = <&gpiog 3 IRQ_TYPE_EDGE_RISING>;
+		interrupt-names = "imu_pinctrl_irqchip";
+	};
+};	
